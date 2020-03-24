@@ -1,8 +1,12 @@
 # uClibc-ng TLS tests
 # Licensed under the LGPL v2.1, see the file COPYING.LIB in this tarball.
 
-TESTS := tst-tls1 tst-tls2 tst-tls3 tst-tls4 tst-tls5 tst-tls6 tst-tls7	\
-	tst-tls8 tst-tls9 tst-tls10 tst-tls11 tst-tls12 tst-tls13	\
+ifeq ($(TARGET_ARCH),kvx)
+CFLAGS += -DUSE_TLS=1 -I.
+endif
+
+TESTS := tst-tls1 tst-tls2 tst-tls3 tst-tls4 tst-tls5 tst-tls6 tst-tls7 \
+	tst-tls8 tst-tls9 tst-tls10 tst-tls11 tst-tls12 tst-tls13 \
 	tst-tls14 tst-tls15 tst-tls16 tst-tls17 tst-tls18 tst-tls-at-ctor \
 	tst-tls1-static tst-tls2-static tst-tls9-static
 TESTS_DISABLED := tst-tls1-static tst-tls2-static tst-tls9-static
@@ -13,30 +17,30 @@ TESTS_DISABLED += tst-tls16
 
 tlsmod17a-suffixes := 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
 tlsmod18a-suffixes := 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
-CFLAGS_tst-tlsmod1.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod2.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod3.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod4.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod5.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod6.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod7.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod8.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod9.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod10.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod11.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod12.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod13.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod13a.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod14a.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod14b.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod15a.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod15b.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod16a.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod16b.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod17a.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod17b.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod18a.so := -fPIC -DSHARED -shared
-CFLAGS_tst-tlsmod-at-ctor.so := -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod1.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod2.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod3.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod4.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod5.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod6.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod7.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod8.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod9.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod10.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod11.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod12.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod13.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod13a.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod14a.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod14b.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod15a.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod15b.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod16a.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod16b.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod17a.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod17b.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod18a.so := $(CFLAGS) -fPIC -DSHARED -shared
+CFLAGS_tst-tlsmod-at-ctor.so := $(CFLAGS) -fPIC -DSHARED -shared
 
 CFLAGS_tst-tls18 += -std=c99
 

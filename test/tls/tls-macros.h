@@ -76,8 +76,8 @@
 #include <tls-macros-xtensa.h>
 #endif
 
-#ifdef __k1c__
-#include <tls-macros-k1c.h>
+#ifdef __kvx__
+#include <tls-macros-kvx.h>
 #endif
 
 #if !defined TLS_LE || !defined TLS_IE \
