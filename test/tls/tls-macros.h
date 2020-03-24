@@ -76,6 +76,10 @@
 #include <tls-macros-xtensa.h>
 #endif
 
+#ifdef __k1c__
+#include <tls-macros-k1c.h>
+#endif
+
 #if !defined TLS_LE || !defined TLS_IE \
       || !defined TLS_LD || !defined TLS_GD
 # error "No support for this architecture so far."
