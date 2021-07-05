@@ -43,6 +43,7 @@ do_test(void)
 	ret = read(fd, &val, sizeof(val));
 	if (ret != -1 || errno != EAGAIN) {
 		error(0, 0, "first read() returned %d", ret);
+		perror(NULL);
 		result = 1;
 	}
 
@@ -54,6 +55,7 @@ do_test(void)
 	ret = read(fd, &val, sizeof(val));
 	if (ret != sizeof(val)) {
 		error(0, 0, "second read() returned %d", ret);
+		perror(NULL);
 		result = 1;
 	}
 
