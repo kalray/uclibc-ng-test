@@ -26,6 +26,7 @@ do_test(void)
 	struct itimerspec s;
 	uint64_t val;
 	time_t start, now;
+	int retried = 0;
 
 	fd = timerfd_create(CLOCK_MONOTONIC, TFD_NONBLOCK);
 	if (fd < 0) {
@@ -46,6 +47,7 @@ do_test(void)
 		result = 1;
 	}
 
+retry:
 	/* let the timer expire, then check it again */
 	do {
 		now = time(NULL);
@@ -53,7 +55,14 @@ do_test(void)
 
 	ret = read(fd, &val, sizeof(val));
 	if (ret != sizeof(val)) {
-		error(0, 0, "second read() returned %d", ret);
+		if (retried == 0 && errno == EAGAIN) {
+			error(0, 0, "second read() returned %d, retry", ret);
+			retried = 1;
+			start = time(NULL);
+			goto retry;
+		}
+
+		error(0, 0, "second read() returned %d with errno %d", ret, errno);
 		result = 1;
 	}
 
