@@ -12,7 +12,7 @@
     __result = (int *) __tls_get_addr (__result); \
     __asm__ ("addd %0 = %0, @dtpoff(" #x ")\n\t"   \
              ";;\n\t"                              \
-         : "=r" (__result));                       \
+         : "+r" (__result));                       \
     __result; })
 
 
@@ -41,7 +41,9 @@
     int *__result;                                 \
     __asm__ ("pcrel %0 = @gotaddr()\n\t"           \
              ";;\n\t"                              \
-             "addd %0 = %0, @tlsie(" #x ")\n\t"    \
+             "lwz %0 = @tlsie(" #x ")[%0]\n\t"         \
+             ";;\n\t"                              \
+             "addd %0 = %0, $tp\n\t"                   \
              ";;\n\t"                              \
          : "=r" (__result));                       \
      __result; })
